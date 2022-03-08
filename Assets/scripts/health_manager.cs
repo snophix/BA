@@ -35,6 +35,10 @@ public class health_manager : MonoBehaviour
         {
             Damage();
         }
+        if(Input.GetButtonDown("Fire3"))
+        {
+            Cure();
+        }
         
         if(health < 0)
         {
@@ -53,6 +57,13 @@ public class health_manager : MonoBehaviour
         //     StartCoroutine(ReplacePlayer());
         //     health = max_health;
         // }
+    }
+    public void Cure()
+    {
+        if(health < max_health)
+            {
+                health++;
+            }
     }
     public void Respawn()
     {
