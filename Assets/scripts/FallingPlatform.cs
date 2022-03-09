@@ -7,8 +7,20 @@ public class FallingPlatform : MonoBehaviour
     public int nothing;
     private Vector3 FirstPosition;
     public Rigidbody rb;
-    private bool falling = false;
+    public bool falling = false;
     public int norme=1;
+    public static FallingPlatform instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("there is more than one instance of health_manager");
+            return;
+        }
+
+        instance = this;
+    }
 
     void Start()
     {
