@@ -15,6 +15,7 @@ public class Platforms_Movement : MonoBehaviour
 
     void Update()
     {
+        // Je veux que ce code s'effectue tant que la variable "falling" est fausse
         while(!FallingPlatform.instance.falling){
             Vector3 dir = target.position - transform.position;
             transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);

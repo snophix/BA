@@ -9,6 +9,7 @@ public class FallingPlatform : MonoBehaviour
     public Rigidbody rb;
     public bool falling = false;
     public int norme=1;
+    // Je cree une instance de ce code car j'ai besoin de la variable falling pour le code Platforms_Movement
     public static FallingPlatform instance;
 
     private void Awake()
