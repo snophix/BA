@@ -46,6 +46,8 @@
      <Compile Include="Assets/scripts/groundCheck.cs" />
      <Compile Include="Assets/scripts/limitIps.cs" />
      <Compile Include="Assets/scripts/cameraFollow.cs" />
+     <Compile Include="Assets/scripts/Inventory.cs" />
+     <Compile Include="Assets/scripts/Curalium.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/snophix/Unity/Hub/Editor/2020.3.30f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

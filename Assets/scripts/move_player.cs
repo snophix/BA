@@ -9,7 +9,8 @@ public class move_player : MonoBehaviour
     public float jumpForce;
     public float doubleJumpForce;
 
-    public Vector3 movement;
+    public float rotation;
+    public float previousRotation;
 
     private bool isJumping;
     public bool isGrounded;
@@ -50,6 +51,30 @@ public class move_player : MonoBehaviour
         }
         horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         verticalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+
+        if(Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") >= 0)
+        {
+            rotation = Input.GetAxis("Horizontal");
+        }
+        if(Input.GetAxis("Vertical") <= 0 && Input.GetAxis("Horizontal") > 0)
+        {
+            rotation = -Input.GetAxis("Vertical") + 1;
+        }
+        if(Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") <= 0)
+        {
+            rotation = -Input.GetAxis("Horizontal") + 2;
+        }
+        if(Input.GetAxis("Vertical") >= 0 && Input.GetAxis("Horizontal") < 0)
+        {
+            rotation = Input.GetAxis("Vertical") + 3;
+        }
+        if(Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)
+        {
+            rotation = previousRotation;
+        }
+
+        transform.rotation = Quaternion.Euler(0, rotation * 90, 0);
+        previousRotation = rotation;
 
         if(Input.GetButtonDown("Jump") && isGrounded)
         {

@@ -35,28 +35,19 @@ public class health_manager : MonoBehaviour
         {
             Damage();
         }
-        if(Input.GetButtonDown("Fire3"))
-        {
-            Cure();
-        }
-        
-        if(health < 0)
-        {
-            //StartCoroutine(ReplacePlayer());
-            health = max_health;
-        }
     }
     public void Damage()
     {
         if(health > 0)
         {
             health --;
+            Health.SetInteger("Health", health);
         }
-        // if(health == 0)
-        // {
-        //     StartCoroutine(ReplacePlayer());
-        //     health = max_health;
-        // }
+        if(health <= 0)
+        {
+            health = max_health;
+            Health.SetInteger("Health", health);
+        }
     }
     public void Cure()
     {
@@ -73,10 +64,10 @@ public class health_manager : MonoBehaviour
     private IEnumerator ReplacePlayer()
     {
         FadeInAnimation.SetTrigger("FadeIn");
-        lose=true;
+        Damage();
+        lose = true;
         yield return new WaitForSeconds(1f);
         transform.position = Player_spawn.instance.transform.position;
-        health--;
-        lose=false;
+        lose = false;
     }
 }
