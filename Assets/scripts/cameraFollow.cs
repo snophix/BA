@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class cameraFollow : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Start is called before the first frame update 
+    // test de git
     void Start()
     {
         
