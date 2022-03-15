@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets/scripts/HealthMeterManager.cs" />
+     <Compile Include="Assets/scripts/Curalium.cs" />
      <Compile Include="Assets/scripts/Checkpoint.cs" />
      <Compile Include="Assets/scripts/deathzone.cs" />
      <Compile Include="Assets/scripts/health_manager.cs" />
@@ -45,9 +46,8 @@
      <Compile Include="Assets/scripts/FallingPlatform.cs" />
      <Compile Include="Assets/scripts/groundCheck.cs" />
      <Compile Include="Assets/scripts/limitIps.cs" />
-     <Compile Include="Assets/scripts/cameraFollow.cs" />
      <Compile Include="Assets/scripts/Inventory.cs" />
-     <Compile Include="Assets/scripts/Curalium.cs" />
+     <Compile Include="Assets/scripts/cameraFollow.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/snophix/Unity/Hub/Editor/2020.3.30f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -636,23 +636,25 @@
     <Reference Include="Unity.Toolchain.Linux-x86_64">
         <HintPath>/home/snophix/unity projects/BA/Library/ScriptAssemblies/Unity.Toolchain.Linux-x86_64.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-        <HintPath>/home/snophix/unity projects/BA/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
         <HintPath>/home/snophix/unity projects/BA/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
         <HintPath>/home/snophix/unity projects/BA/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-        <HintPath>/home/snophix/unity projects/BA/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.SysrootPackage.Editor">
         <HintPath>/home/snophix/unity projects/BA/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{d84ec810-0b44-a616-5f0f-55778f303384}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{5481b69d-dfe2-f667-44cb-4d67c0abeaad}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

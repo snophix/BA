@@ -21,6 +21,7 @@ public class cameraFollow : MonoBehaviour
     public Quaternion rotation2 = Quaternion.Euler(25, 0, 0);
 
     private Vector3 velocity;
+    private float Velocity = 0.0f;
 
     void Start()
     {
@@ -53,7 +54,8 @@ public class cameraFollow : MonoBehaviour
 
         transform.position = Vector3.SmoothDamp(transform.position, initialCameraPosition, ref velocity, timeOffset);
         initialCameraPosition = move_player.instance.transform.position + positionOffSet - new Vector3(0, 0, 6);
-        transform.rotation = rotationOffSet;
+        float yRotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationOffSet.eulerAngles.y, ref Velocity, timeOffset);
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
     }
 }
 

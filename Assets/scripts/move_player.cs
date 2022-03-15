@@ -22,6 +22,8 @@ public class move_player : MonoBehaviour
     public LayerMask collisionLayers;
 
     private Vector3 Velocity = Vector3.zero;
+    public Vector3 previousTraget;
+    public Vector3 target;
     public float horizontalMovement;
     public float verticalMovement;
 
@@ -52,29 +54,11 @@ public class move_player : MonoBehaviour
         horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         verticalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
-        if(Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") >= 0)
+        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            rotation = Input.GetAxis("Horizontal");
+            target = transform.position + new Vector3(horizontalMovement, 0, verticalMovement);
+            transform.LookAt(target);
         }
-        if(Input.GetAxis("Vertical") <= 0 && Input.GetAxis("Horizontal") > 0)
-        {
-            rotation = -Input.GetAxis("Vertical") + 1;
-        }
-        if(Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") <= 0)
-        {
-            rotation = -Input.GetAxis("Horizontal") + 2;
-        }
-        if(Input.GetAxis("Vertical") >= 0 && Input.GetAxis("Horizontal") < 0)
-        {
-            rotation = Input.GetAxis("Vertical") + 3;
-        }
-        if(Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)
-        {
-            rotation = previousRotation;
-        }
-
-        transform.rotation = Quaternion.Euler(0, rotation * 90, 0);
-        previousRotation = rotation;
 
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
