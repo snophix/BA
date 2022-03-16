@@ -39,7 +39,7 @@ public class move_player : MonoBehaviour
 
     void Start()
     {
-        //rb=this.GetComponent<Rigidbody>();
+        
     }
 
     void Update()
