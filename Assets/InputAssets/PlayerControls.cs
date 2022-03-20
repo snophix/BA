@@ -44,6 +44,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""7dbcad65-49a2-43dd-8616-59e1f9896393"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jetpack"",
+                    ""type"": ""Button"",
+                    ""id"": ""32751f89-ef13-4daf-8ab1-4e6e5439de34"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +152,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f689ddfe-43f6-428d-ae6b-fe2dafa9c806"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ea55271-e7ef-41f2-b0ee-7d88c698374b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65be0cc9-10fd-4633-9ed7-61d184b2e5ee"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jetpack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +195,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_GmaePlay = asset.FindActionMap("GmaePlay", throwIfNotFound: true);
         m_GmaePlay_Jump = m_GmaePlay.FindAction("Jump", throwIfNotFound: true);
         m_GmaePlay_Move = m_GmaePlay.FindAction("Move", throwIfNotFound: true);
+        m_GmaePlay_Sprint = m_GmaePlay.FindAction("Sprint", throwIfNotFound: true);
+        m_GmaePlay_Jetpack = m_GmaePlay.FindAction("Jetpack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,12 +258,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IGmaePlayActions m_GmaePlayActionsCallbackInterface;
     private readonly InputAction m_GmaePlay_Jump;
     private readonly InputAction m_GmaePlay_Move;
+    private readonly InputAction m_GmaePlay_Sprint;
+    private readonly InputAction m_GmaePlay_Jetpack;
     public struct GmaePlayActions
     {
         private @PlayerControls m_Wrapper;
         public GmaePlayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_GmaePlay_Jump;
         public InputAction @Move => m_Wrapper.m_GmaePlay_Move;
+        public InputAction @Sprint => m_Wrapper.m_GmaePlay_Sprint;
+        public InputAction @Jetpack => m_Wrapper.m_GmaePlay_Jetpack;
         public InputActionMap Get() { return m_Wrapper.m_GmaePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -226,6 +283,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnMove;
+                @Sprint.started -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnSprint;
+                @Jetpack.started -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnJetpack;
+                @Jetpack.performed -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnJetpack;
+                @Jetpack.canceled -= m_Wrapper.m_GmaePlayActionsCallbackInterface.OnJetpack;
             }
             m_Wrapper.m_GmaePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -236,6 +299,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
+                @Jetpack.started += instance.OnJetpack;
+                @Jetpack.performed += instance.OnJetpack;
+                @Jetpack.canceled += instance.OnJetpack;
             }
         }
     }
@@ -244,5 +313,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
+        void OnJetpack(InputAction.CallbackContext context);
     }
 }

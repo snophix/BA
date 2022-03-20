@@ -9,8 +9,13 @@ public class move_player : MonoBehaviour
 
     public Rigidbody rb;
     public float moveSpeed;
+    public float sprintSpeed;
+    public float actualSpeed;
     public float jumpForce;
     public float doubleJumpForce;
+    public float jetpackForce;
+    public float jetpackCharge;
+    public float maxJetpackCharge;
 
     public float rotation;
     public float previousRotation;
@@ -19,6 +24,7 @@ public class move_player : MonoBehaviour
     public bool isGrounded;
     private bool canDoubleJump;
     private bool isDoubleJumping;
+    private bool isUsingJetpack;
 
     public Transform groundCheck;
     public float groundCheckRadius;
@@ -49,11 +55,16 @@ public class move_player : MonoBehaviour
         controls.GmaePlay.Jump.performed += ctx => JumpAction();
         controls.GmaePlay.Move.performed += ctx => originalMovement = ctx.ReadValue<Vector2>();
         controls.GmaePlay.Move.canceled += ctx => originalMovement = Vector2.zero;
+        controls.GmaePlay.Sprint.performed += ctx => SprintAction();
+        controls.GmaePlay.Sprint.canceled += ctx => WalkAction();
+        controls.GmaePlay.Jetpack.performed += ctx => UseJetpack();
+        controls.GmaePlay.Jetpack.canceled += ctx => DontUseJetpack();
     }
 
     void Start()
     {
-        //rb=this.GetComponent<Rigidbody>();
+        actualSpeed = moveSpeed;
+        jetpackCharge = maxJetpackCharge;
     }
 
     void Update()
@@ -63,7 +74,7 @@ public class move_player : MonoBehaviour
             canDoubleJump = true;
         }
 
-        Movement = new Vector2(originalMovement.x * moveSpeed * Time.deltaTime, originalMovement.y * moveSpeed * Time.deltaTime);
+        Movement = new Vector2(originalMovement.x * actualSpeed * Time.deltaTime, originalMovement.y * actualSpeed * Time.deltaTime);
 
         if(originalMovement != Vector2.zero)
         {
@@ -88,6 +99,26 @@ public class move_player : MonoBehaviour
             canDoubleJump = false;
         }
     }
+
+    public void SprintAction()
+    {
+        actualSpeed = sprintSpeed;
+    }
+
+    public void WalkAction()
+    {
+        actualSpeed = moveSpeed;
+    }
+
+    public void UseJetpack()
+    {
+        isUsingJetpack = true;
+    }
+    public void DontUseJetpack()
+    {
+        isUsingJetpack = false;
+    }
+
     void MovePlayer(Vector2 traget2)
     {
         Vector3 targetVelocity = new Vector3(traget2.x, rb.velocity.y, traget2.y);
@@ -101,6 +132,11 @@ public class move_player : MonoBehaviour
         {
             rb.AddForce(new Vector2(0f, doubleJumpForce));
             isDoubleJumping = false;
+        }
+        if(isUsingJetpack && jetpackCharge > 0)
+        {
+            rb.AddForce(new Vector2(0f, jetpackForce));
+            jetpackCharge --;
         }
     }
 

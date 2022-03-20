@@ -28,14 +28,6 @@ public class health_manager : MonoBehaviour
     {
         health = max_health;
     }
-
-    void Update()
-    {
-        if(Input.GetButtonDown("Fire2"))
-        {
-            Damage();
-        }
-    }
     public void Damage()
     {
         if(health > 0)

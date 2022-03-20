@@ -713,6 +713,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: portal
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2a57c770be817a583b61d33b648a0ad9, type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a57c770be817a583b61d33b648a0ad9, type: 3}
 --- !u!1 &1970341579
@@ -790,7 +794,7 @@ PrefabInstance:
       objectReference: {fileID: 379508312}
     - target: {fileID: 1312427966605522592, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1312427966605522592, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
       propertyPath: FadeInAnimation
@@ -798,7 +802,19 @@ PrefabInstance:
       objectReference: {fileID: 447042298}
     - target: {fileID: 2039032241205563305, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2039032241205563305, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
+      propertyPath: sprintSpeed
+      value: 550
+      objectReference: {fileID: 0}
+    - target: {fileID: 2039032241205563305, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
+      propertyPath: jetpackForce
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 2039032241205563305, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
+      propertyPath: maxJetpackCharge
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6383421154691152606, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
       propertyPath: m_RootOrder
