@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets/scripts/HealthMeterManager.cs" />
+     <Compile Include="Assets/scripts/DontDestroyOnLoad.cs" />
      <Compile Include="Assets/scripts/Curalium.cs" />
      <Compile Include="Assets/scripts/Checkpoint.cs" />
      <Compile Include="Assets/scripts/deathzone.cs" />
@@ -48,7 +49,8 @@
      <Compile Include="Assets/scripts/limitIps.cs" />
      <Compile Include="Assets/scripts/Inventory.cs" />
      <Compile Include="Assets/scripts/cameraFollow.cs" />
-     <Compile Include="Assets/DontDestroyOnLoad.cs" />
+     <Compile Include="Assets/scripts/LoadSpecificLevel.cs" />
+     <Compile Include="Assets/scripts/PortalSystem.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/snophix/Unity/Hub/Editor/2020.3.30f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
