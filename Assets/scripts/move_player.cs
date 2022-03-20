@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class move_player : MonoBehaviour
 {
+    public RenderTexture rt;
     public Rigidbody rb;
     public float moveSpeed;
     public float jumpForce;
@@ -39,7 +40,9 @@ public class move_player : MonoBehaviour
 
     void Start()
     {
-        
+        rt = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
+        rt.Create();
+
     }
 
     void Update()
