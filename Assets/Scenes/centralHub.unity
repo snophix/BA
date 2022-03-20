@@ -789,9 +789,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 379508312}
     - target: {fileID: 1312427966605522592, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312427966605522592, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
       propertyPath: FadeInAnimation
       value: 
       objectReference: {fileID: 447042298}
+    - target: {fileID: 2039032241205563305, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6383421154691152606, guid: e9a609cefd65ef20fa0f8e289e95f6f7, type: 3}
       propertyPath: m_RootOrder
       value: 1

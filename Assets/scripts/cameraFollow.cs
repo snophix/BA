@@ -30,7 +30,7 @@ public class cameraFollow : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetButtonDown("Fire3"))
+        if(false)
         {
             if(cameraNum < 2)
             {

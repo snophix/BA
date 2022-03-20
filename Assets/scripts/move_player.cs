@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class move_player : MonoBehaviour
 {
+    PlayerControls controls;
+
     public Rigidbody rb;
     public float moveSpeed;
     public float jumpForce;
@@ -26,6 +29,8 @@ public class move_player : MonoBehaviour
     public Vector3 target;
     public float horizontalMovement;
     public float verticalMovement;
+    public Vector2 Movement;
+    public Vector2 originalMovement;
 
     public static move_player instance;
 
@@ -38,6 +43,12 @@ public class move_player : MonoBehaviour
         }
 
         instance = this;
+
+        controls = new PlayerControls();
+
+        controls.GmaePlay.Jump.performed += ctx => JumpAction();
+        controls.GmaePlay.Move.performed += ctx => originalMovement = ctx.ReadValue<Vector2>();
+        controls.GmaePlay.Move.canceled += ctx => originalMovement = Vector2.zero;
     }
 
     void Start()
@@ -51,31 +62,35 @@ public class move_player : MonoBehaviour
         {
             canDoubleJump = true;
         }
-        horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        verticalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
-        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        Movement = new Vector2(originalMovement.x * moveSpeed * Time.deltaTime, originalMovement.y * moveSpeed * Time.deltaTime);
+
+        if(originalMovement != Vector2.zero)
         {
-            target = transform.position + new Vector3(horizontalMovement, 0, verticalMovement);
+            target = transform.position + new Vector3(originalMovement.x, 0, originalMovement.y);
             transform.LookAt(target);
-        }
-
-        if(Input.GetButtonDown("Jump") && isGrounded)
-        {
-            isJumping = true;
-        }else if(Input.GetButtonDown("Jump") && canDoubleJump)
-        {
-            isDoubleJumping = true;
         }
     }
 
     void FixedUpdate()
     {
-        MovePlayer(horizontalMovement, verticalMovement);
+        MovePlayer(Movement);
     }
-    void MovePlayer(float _horizontalMovement, float _verticalMovement)
+
+    public void JumpAction()
     {
-        Vector3 targetVelocity = new Vector3(_horizontalMovement, rb.velocity.y, _verticalMovement);
+        if(isGrounded)
+        {
+            isJumping = true;
+        }else if(canDoubleJump)
+        {
+            isDoubleJumping = true;
+            canDoubleJump = false;
+        }
+    }
+    void MovePlayer(Vector2 traget2)
+    {
+        Vector3 targetVelocity = new Vector3(traget2.x, rb.velocity.y, traget2.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref Velocity, .04f);
 
         if(isJumping)
@@ -85,8 +100,12 @@ public class move_player : MonoBehaviour
         }else if(isDoubleJumping)
         {
             rb.AddForce(new Vector2(0f, doubleJumpForce));
-            canDoubleJump = false;
             isDoubleJumping = false;
         }
+    }
+
+    void OnEnable()
+    {
+        controls.GmaePlay.Enable();
     }
 }
